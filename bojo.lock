@@ -1,17 +1,10 @@
 version = 1
-mojo = ""
+mojo = "1.1.0-8189361e"
 
 [[package]]
-  name = "gh.LukasLow.bojo_demo_hello"
-  repo = "https://github.com/LukasLow/bojo_demo_hello"
-  tag = "v0.1.0"
-  commit = "25f6236b2426fbc8ae996ddf96b4d96bb202af7a"
-  tree = "git-tree:97944c4832a617f70543d333c576d49fc18ce42f"
-
-[[package]]
-  name = "gh.LukasLow.bojo_demo_math"
-  repo = "https://github.com/LukasLow/bojo_demo_math"
-  tag = "v0.1.0"
-  commit = "a0a032b50f7670ae6859fc498a88c64c4ee9f511"
-  tree = "git-tree:e7968db98abf4e456783ab59a8a579dfa31cfc51"
-  alias = "mathx"
+  name = "gh.bojolib.bojo_libtemplate"
+  repo = "https://github.com/bojolib/bojo_libtemplate"
+  tag = "v0.2.0"
+  commit = "70b1b45a2264b06c60319d163253cbbf434c7175"
+  tree = "git-tree:ee66a7b3d6ef1dfde4a8868195130cb2e13ab3ac"
+  alias = "greeting"

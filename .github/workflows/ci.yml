@@ -1,0 +1,41 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+
+      # bojo installs the Mojo toolchain pinned in [version] on first use.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: install bojo
+        run: go install github.com/bojolib/bojo/cmd/bojo@latest
+
+      - name: build (locked)
+        run: bojo build --locked
+
+      - name: validate manifest and vendor
+        run: bojo validate
+
+      - name: run demo and verify output
+        run: |
+          out="$(./.out/bojo_demo)"
+          printf '%s\n' "$out"
+          printf '%s\n' "$out" | grep -Fxq "bojolib demo"
+          printf '%s\n' "$out" | grep -Fxq "canonical: hello, bojolib"
+          printf '%s\n' "$out" | grep -Fxq "alias: hello, mojo"

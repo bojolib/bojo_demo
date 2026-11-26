@@ -1,15 +1,19 @@
-"""Tiny consumer of two published bojo libraries.
+"""Living showcase for bojolib libraries.
 
-`bojo_demo_math` is aliased to `mathx` in bojo.toml; `bojo_demo_hello` is used
-under its full module path, which a library must always write.
+Demonstrates consuming a published bojolib package via both its canonical
+module path (`gh.bojolib.bojo_libtemplate`) and a project-local `[alias]`
+(`greeting`) declared in `bojo.toml`.
 
-Run it with `bojo build && .out/bojo_demo`.
+Build and run with:
+    bojo build --locked
+    ./.out/bojo_demo
 """
 
-from gh.LukasLow.bojo_demo_hello import greet
-from mathx import add
+from gh.bojolib.bojo_libtemplate import greet as greet_canonical
+from greeting import greet
 
 
 def main():
-    print(greet("mojo"))
-    print("2 + 3 =", add(2, 3))
+    print("bojolib demo")
+    print("canonical:", greet_canonical("bojolib"))
+    print("alias:", greet("mojo"))

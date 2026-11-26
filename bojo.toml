@@ -12,12 +12,23 @@ mojo = "1.2.0"
 output = "dir"
 strip  = true
 
-[deps-from."https://github.com/LukasLow/bojo_demo_math"]
-version = "v0.1.0"
+# Bootstrap smoke-test dependency; additional bojolib libraries (io, socket,
+# http, ...) are added here as they ship.
+[deps-from."https://github.com/bojolib/bojo_libtemplate"]
+version = "v0.2.0"
 
-[deps-from."https://github.com/LukasLow/bojo_demo_hello"]
-version = "v0.1.0"
-
-# Only the project may shorten a name, and only here, keyed by module path.
+# Only the root project may shorten a module path, and only here, keyed by
+# canonical module path. Libraries always write full module paths.
 [alias]
-"gh.LukasLow.bojo_demo_math" = "mathx"
+"gh.bojolib.bojo_libtemplate" = "greeting"
+
+# Root-only conflict resolution and fork replacement (never allowed in
+# libraries). Dependency resolution is strict by default (D69: no silent
+# upgrades); resolve diamond conflicts or point at a fork explicitly here:
+#
+# [override."gh.bojolib.socket"]
+# version = "v0.2.1"
+#
+# [replace."gh.bojolib.socket"]
+# repo    = "https://github.com/example/socket-fork"
+# version = "v0.2.1"
